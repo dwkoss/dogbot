@@ -86,7 +86,7 @@ exports.run = async (req, res) => {
 
   // base64 encode media, add to tweet
   const base64Media = await imageToBase64(doggo.primary_photo_cropped.medium);
-
+  console.log('got the media');
   // Making the tweet
   const consumerKey = await getFromSecretManager(secretManagerClient, twitterKeyLoc);
   const consumerSecret = await getFromSecretManager(secretManagerClient, twitterSecretLoc);
@@ -103,7 +103,7 @@ exports.run = async (req, res) => {
   });
 
   const tweetText = `${doggoResponse.text} ${doggoResponse.url}`
-
+  console.log('thinking about making a tweet');
   if (!doggoResponse.text) {
     console.log('no tweet was generated because the doggo text is wrong');
     res.send({
@@ -117,9 +117,11 @@ exports.run = async (req, res) => {
       tweetText,
     });
   } else {
+    console.log('making a tweet');
     const mediaIdStr = await twitClient.post('media/upload', { media_data: base64Media });
+    console.log('got a media id', mediaIdStr);
     const tweetResponse = await twitClient.post('statuses/update', { status: tweetText, media_ids: [mediaIdStr] });
-
+    console.log('made a tweet');
     res.send({
       tweetText,
       tweetResponse,
