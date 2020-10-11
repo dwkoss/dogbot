@@ -30,7 +30,7 @@ const getValidDoggos = (animals) => animals.filter((animal) => animal.type === '
 const getRandomArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // We could use tags, but the api response seems to always return an empty list. Oh well! They're all good boys and girls.
-const agnosticCompliments = ['classy', 'good-looking', 'elegant', 'majestic', 'smart', 'cool', 'delightful', 'knockout', 'superb'];
+const agnosticCompliments = ['classy', 'good-looking', 'elegant', 'majestic', 'smart', 'cool', 'delightful', 'knockout', 'superb', 'civilized'];
 const girlCompliments = ['beautiful', 'pretty', 'graceful', 'foxy', 'devine', 'lovely', 'stunning', ...agnosticCompliments];
 const boyCompliments = ['handsome', 'sharp', 'dapper', 'suave', 'hunky', 'studly', 'lady killer', 'slick', ...agnosticCompliments];
 
@@ -44,6 +44,28 @@ const lookingFor = [
   'who wants to give you all the cuddles!',
   'who will just warm your heart!',
   'who will bring much joy to your home!',
+  'who would like a treat now please.',
+  'who will cuddle your face off.',
+  'who volunteers at local food shelters.',
+  'who loves everyone!!',
+  'who enjoys laying in sunbeams.',
+  'who will never stop zooming.',
+  'who enjoys second breakfast.',
+  'who enjoys wine and book clubs.',
+  'who enjoys long walks on the beach.',
+  'who would like the sandwich that you\'re eating.',
+  'who cant wait to fart in your bed.',
+  'who enjoys taking up three quarters of the couch while taking naps.',
+  'who takes birthdays very seriously.',
+  'who enjoys musicals more than any other medium.',
+  'who is tired of waiting in line for sunday brunch.',
+  'who is career oriented, and will have time for you after 6pm.',
+  'who may or may not have extra toes.',
+  'who hates relaxing on vacations.',
+  'who enjoys sightseeing, even if unable to see particularly far.',
+  'who likes pooping at inconvenient times. Always outside though.',
+  'who hates people who do crossfit.',
+  'who loves daytime television.',
 ];
 
 const getDoggoText = (doggo) => {
