@@ -54,5 +54,5 @@ exports.run = async (req, res) => {
 
   const dogs = await petfinderClient.animal.search({ type: 'dog' });
   const doggo = getRandomArray(getValidDoggos(dogs.data.animals));
-  res.send({text: getDoggoText(doggo), photo: doggo.primary_photo_cropped.medium);
+  res.send({text: getDoggoText(doggo), photo: doggo.primary_photo_cropped.medium, url: doggo.url});
 };
