@@ -54,6 +54,19 @@ const getDoggoText = (doggo) => {
 }
 
 exports.run = async (req, res) => {
+  let parsedBody;
+
+  // https://stackoverflow.com/questions/53216177/http-triggering-cloud-function-with-cloud-scheduler
+  // tl;dr - If cloud scheduler executes via post request, the content type is not set
+  // to application/json, so we need to manually parse the request body
+  if (req.header('content-type') === 'application/json') {
+    console.log('request header content-type is application/json and auto parsing the req body as json');
+    parsedBody = req.body;
+  } else {
+    console.log('request header content-type is NOT application/json and MANUALLY parsing the req body as json');
+    parsedBody = JSON.parse(req.body);
+  }
+
   // Getting the doggo
   const secretManagerClient = new SecretManagerServiceClient();
   const petfinderApiKey = await getFromSecretManager(secretManagerClient, petfinderApiKeyLoc);
