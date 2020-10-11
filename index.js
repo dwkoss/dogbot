@@ -85,13 +85,13 @@ exports.run = async (req, res) => {
     access_token_secret: accessTokenSecret,
   });
 
-  const tweetText = `${doggoResponse.doggoText} ${doggoResponse.url}`
+  const tweetText = `${doggoResponse.text} ${doggoResponse.url}`
 
-  if (!doggoResponse.doggoText) {
+  if (!doggoResponse.text) {
     console.log('no tweet was generated because the doggo text is wrong');
     res.send({
       doggo,
-      doggoText: doggoText,
+      doggoText: doggoResponse.text,
       photo: doggo.primary_photo_cropped.medium,
       url: doggo.url
     });
