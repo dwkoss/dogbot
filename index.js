@@ -120,6 +120,7 @@ exports.run = async (req, res) => {
     console.log('making a tweet');
     const mediaData = await twitClient.post('media/upload', { media_data: base64Media });
     const mediaIdStr = mediaData.media_id_string;
+    console.log('media', media);
     console.log('got a media id', mediaIdStr);
     const tweetResponse = await twitClient.post('statuses/update', { status: tweetText, media_ids: [mediaIdStr] });
     console.log('made a tweet');
