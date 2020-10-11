@@ -42,7 +42,7 @@ const getDoggoText = (doggo) => {
     ? getRandomArray(girlCompliments)
     : getRandomArray(boyCompliments);
   const genderStr = doggo.gender === 'Female' ? 'girl' : 'boy';
-  const breedStr = doggo.breeds.secondary ? `${doggo.breeds.primary} / ${doggo.breeds.secondary}` : ${doggo.breeds.primary}
+  const breedStr = doggo.breeds.secondary ? `${doggo.breeds.primary} / ${doggo.breeds.secondary}` : doggo.breeds.primary;
   const breedMixStr = doggo.breeds.mixed ? `${breedStr} mix` : doggo.breeds.primary;
   return `${doggo.name} is a ${complimentStr} ${genderStr}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)}`;
 }
