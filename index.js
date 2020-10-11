@@ -12,12 +12,12 @@ const getFromSecretManager = async (client, name) => {
 };
 
 const getValidDoggos = (animals) => animals.filter((animal) => animal.type === 'Dog'
-    && animal.status === 'adoptable'
-    && animal.name
-    && animal.gender
-    && animal.colors.primary
-    && animal.breeds.primary
-    && animal.primary_photo_cropped.medium);
+  && animal.status === 'adoptable'
+  && animal.name
+  && animal.gender
+  && animal.colors.primary
+  && animal.breeds.primary
+  && animal.primary_photo_cropped && animal.primary_photo_cropped.medium);
 
 exports.run = async (req, res) => {
   const secretManagerClient = new SecretManagerServiceClient();
