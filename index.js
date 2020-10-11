@@ -24,10 +24,12 @@ const getValidDoggos = (animals) => animals.filter((animal) => animal.type === '
   && animal.gender
   && animal.colors && animal.colors.primary
   && animal.breeds && animal.breeds.primary
-  && animal.primary_photo_cropped && animal.primary_photo_cropped.medium);
+  && animal.primary_photo_cropped && animal.primary_photo_cropped.medium
+  && animal.contact && animal.contact.address && animal.contact.address.city && animal.contact.address.state);
 
 const getRandomArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
+// We could use tags, but the api response seems to always return an empty list. Oh well! They're all good boys and girls.
 const agnosticCompliments = ['classy', 'good-looking', 'elegant', 'majestic', 'smart', 'cool', 'delightful', 'knockout', 'superb'];
 const girlCompliments = ['beautiful', 'pretty', 'graceful', 'foxy', 'devine', 'lovely', 'stunning', ...agnosticCompliments];
 const boyCompliments = ['handsome', 'sharp', 'dapper', 'suave', 'hunky', 'studly', 'lady killer', 'slick', ...agnosticCompliments];
@@ -51,7 +53,7 @@ const getDoggoText = (doggo) => {
   const genderStr = doggo.gender === 'Female' ? 'girl' : 'boy';
   const breedStr = doggo.breeds.secondary ? `${doggo.breeds.primary} / ${doggo.breeds.secondary}` : doggo.breeds.primary;
   const breedMixStr = doggo.breeds.mixed ? `${breedStr} mix` : doggo.breeds.primary;
-  return `${doggo.name} is a ${complimentStr} ${genderStr}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)}`;
+  return `${doggo.name} is a ${complimentStr} ${genderStr}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)} ${doggo.name} can be found near ${doggo.contact.address.city}, ${doggo.contact.address.state}.`;
 }
 
 exports.run = async (req, res) => {
