@@ -15,9 +15,36 @@ const getValidDoggos = (animals) => animals.filter((animal) => animal.type === '
   && animal.status === 'adoptable'
   && animal.name
   && animal.gender
-  && animal.colors.primary
-  && animal.breeds.primary
+  && animal.colors && animal.colors.primary
+  && animal.breeds && animal.breeds.primary
   && animal.primary_photo_cropped && animal.primary_photo_cropped.medium);
+
+const getRandomArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+const agnosticCompliments = ['classy', 'good-looking', 'elegant', 'majestic', 'smart', 'cool', 'delightful', 'knockout', 'superb'];
+const girlCompliments = ['beautiful', 'pretty', 'graceful', 'foxy', 'devine', 'lovely', 'stunning', ...agnosticCompliments];
+const boyCompliments = ['handsome', 'sharp', 'dapper', 'suave', 'hunky', 'studly', 'lady killer', 'slick', ...agnosticCompliments];
+
+const lookingFor = [
+  'whose looking for their forever home!',
+  'who wants a new mom or dad!',
+  'who wants to give you a kiss!',
+  'who wants to sit for you!',
+  'who wants a booty rub from you.',
+  'who will jump for joy when they meet you!',
+  'who wants to give you all the cuddles!',
+  'who will just warm your heart!',
+  'who will bring much joy to your home!',
+];
+
+const getDoggoText = (doggo) => {
+  const complimentStr = doggo.gender === 'Female'
+    ? getRandomArray(girlCompliments)
+    : getRandomArray(boyCompliments);
+  const genderStr = doggo.gender === 'Female' ? 'girl' : 'boy';
+  const breedStr = doggo.breeds.mixed ? `${doggo.breeds.primary} / ${dogg.breeds.secondary} mix` : ${doggo.breeds.primary};
+  return `${doggo.name} is a ${complimentStr} ${genderStr}! ${doggo.name} is a ${breedStr}, ${getRandomArray(lookingFor)}`;
+}
 
 exports.run = async (req, res) => {
   const secretManagerClient = new SecretManagerServiceClient();
@@ -27,5 +54,5 @@ exports.run = async (req, res) => {
 
   const dogs = await petfinderClient.animal.search({ type: 'dog' });
 
-  res.send(getValidDoggos(dogs.data.animals));
+  res.send(getDoggoText(getRandomArray(getValidDoggos(dogs.data.animals))));
 };
