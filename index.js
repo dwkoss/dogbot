@@ -11,6 +11,14 @@ const getFromSecretManager = async (client, name) => {
   return version.payload.data.toString();
 };
 
+const getValidDoggos = (animals) => animals.filter((animal) => animal.type === 'Dog'
+    && animal.status === 'adoptable'
+    && animal.name
+    && animal.gender
+    && animal.colors.primary
+    && animal.breeds.primary
+    && animal.primary_photo_cropped.medium);
+
 exports.run = async (req, res) => {
   const secretManagerClient = new SecretManagerServiceClient();
   const petfinderApiKey = await getFromSecretManager(secretManagerClient, petfinderApiKeyLoc);
@@ -19,5 +27,5 @@ exports.run = async (req, res) => {
 
   const dogs = await petfinderClient.animal.search({ type: 'dog' });
 
-  res.send(dogs.data.animals);
+  res.send(getValidDoggos(dogs.data.animals));
 };
