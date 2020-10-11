@@ -1,6 +1,7 @@
 const { SecretManagerServiceClient } = require('@google-cloud/secret-manager');
 const { Client } = require('@petfinder/petfinder-js');
 const Twit = require('twit');
+const imageToBase64 = require('image-to-base64');
 
 const petfinderApiKeyLoc = process.env.PETFINDER_DOGBOT_API_KEY_LOC;
 const petfinderSecretLoc = process.env.PETFINDER_DOGBOT_SECRET_LOC;
@@ -83,6 +84,9 @@ exports.run = async (req, res) => {
   };
   console.log(doggoResponse); // logging doggoResponse to debug when necessary
 
+  // base64 encode media, add to tweet
+  const base64Media = await imageToBase64(doggo.primary_photo_cropped.medium);
+
   // Making the tweet
   const consumerKey = await getFromSecretManager(secretManagerClient, twitterKeyLoc);
   const consumerSecret = await getFromSecretManager(secretManagerClient, twitterSecretLoc);
@@ -113,7 +117,8 @@ exports.run = async (req, res) => {
       tweetText,
     });
   } else {
-    const tweetResponse = await twitClient.post('statuses/update', { status: tweetText });
+    const mediaIdStr = await twitClient.post('media/upload', { media_data: base64Media });
+    const tweetResponse = await twitClient.post('statuses/update', { status: tweetText, media_ids: [mediaIdStr] });
 
     res.send({
       tweetText,

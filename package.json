@@ -19,6 +19,7 @@
   "dependencies": {
     "@google-cloud/secret-manager": "^3.2.0",
     "@petfinder/petfinder-js": "^1.0.6",
+    "image-to-base64": "^2.1.1",
     "twit": "^2.2.11"
   }
 }
