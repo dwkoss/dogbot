@@ -1,0 +1,24 @@
+{
+  "name": "dogbot",
+  "version": "1.0.0",
+  "description": "Tweets dogs for adoption",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwkoss/dogbot.git"
+  },
+  "author": "Daniel Koss",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dwkoss/dogbot/issues"
+  },
+  "homepage": "https://github.com/dwkoss/dogbot#readme",
+  "dependencies": {
+    "@google-cloud/secret-manager": "^3.2.0",
+    "@petfinder/petfinder-js": "^1.0.6",
+    "twit": "^2.2.11"
+  }
+}
