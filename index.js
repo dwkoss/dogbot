@@ -67,7 +67,7 @@ const lookingFor = [
   'who hates people who do crossfit.',
   'who loves daytime television.',
   'who will not be available on Sundays during Football season.',
-  'who is absolutely obsessed with with tennis balls.',
+  'who is absolutely obsessed with tennis balls.',
   'who is loves listening to podcasts while on their walks.',
   'who will probably not help with too many chores around the house.',
   'who will be super protective for all the moms and dads.',
