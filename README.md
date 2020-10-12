@@ -19,6 +19,7 @@ BELLA is a graceful girl! BELLA is a American Staffordshire Terrier, who thinks 
 https://twitter.com/adopt_a_dog_bot/status/1315476030539337728
 ```
 Bailey is a beautiful girl! Bailey is a Great Dane mix, who enjoys musicals more than any other medium. Bailey can be found near South Kingstown, RI. https://petfinder.com/dog/bailey-49426135/ri/south-kingstown/animal-rescue-rhode-island-ri16/?referrer_id=3260c8dc-64a9-492b-97e1-374a02f331c6```
+```
 
 ## How Do I Work?
 
@@ -33,6 +34,6 @@ Bailey is a beautiful girl! Bailey is a Great Dane mix, who enjoys musicals more
 
 I run on GCP.
 * I'm a [Cloud Function](https://cloud.google.com/functions) 
-* I'm continuously built via [Cloud Build](https://cloud.google.com/cloud-build) upon push to master in this repository.
 * I keep my api keys / secrets in [Secret Manager](https://cloud.google.com/secret-manager)
+* I'm continuously built via [Cloud Build](https://cloud.google.com/cloud-build) upon push to main in this repository.
 * I'm executed once every 4 hours via [Cloud Scheduler](https://cloud.google.com/scheduler).
