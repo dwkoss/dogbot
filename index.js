@@ -30,9 +30,9 @@ const getValidDoggos = (animals) => animals.filter((animal) => animal.type === '
 const getRandomArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // We could use tags, but the api response seems to always return an empty list. Oh well! They're all good boys and girls.
-const agnosticCompliments = ['classy', 'good-looking', 'elegant', 'majestic', 'smart', 'cool', 'delightful', 'knockout', 'superb', 'civilized'];
-const girlCompliments = ['beautiful', 'pretty', 'graceful', 'foxy', 'devine', 'lovely', 'stunning', ...agnosticCompliments];
-const boyCompliments = ['handsome', 'sharp', 'dapper', 'suave', 'hunky', 'studly', 'lady killer', 'slick', ...agnosticCompliments];
+const agnosticCompliments = ['a classy', 'a good-looking', 'an elegant', 'a majestic', 'a smart', 'a cool', 'a delightful', 'a knockout', 'a superb', 'a civilized'];
+const girlCompliments = ['a beautiful', 'a pretty', 'a graceful', 'a oxy', 'a devine', 'a lovely', 'a stunning', ...agnosticCompliments];
+const boyCompliments = ['a handsome', 'a sharp', 'a dapper', 'a suave', 'a hunky', 'a studly', 'a lady killer', 'a slick', ...agnosticCompliments];
 
 const lookingFor = [
   'whose looking for their forever home!',
@@ -85,7 +85,14 @@ const lookingFor = [
   'who is an advocate for recycling paper, plastic, and aluminum.',
   'who thinks that drinking water is underrated.',
   'who ocasionally enjoys howling at the moon.',
-  'who enjoys nothing more than an afternoon snoo.'
+  'who enjoys nothing more than an afternoon snoo.',
+  'who thinks that they\'re a pretty big deal.',
+  'who doesnt really like long term commitments.',
+  'who loves going on incredible adventures!',
+  'who is excited to adopt you!',
+  'who cant wait to be your pumpkin pie!',
+  'who gets startled by shadows.',
+  'who tries their best!',
 ];
 
 const getDoggoText = (doggo) => {
@@ -95,7 +102,7 @@ const getDoggoText = (doggo) => {
   const genderStr = doggo.gender === 'Female' ? 'girl' : 'boy';
   const breedStr = doggo.breeds.secondary ? `${doggo.breeds.primary} / ${doggo.breeds.secondary}` : doggo.breeds.primary;
   const breedMixStr = doggo.breeds.mixed ? `${breedStr} mix` : doggo.breeds.primary;
-  return `${doggo.name} is a ${complimentStr} ${genderStr}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)} ${doggo.name} can be found near ${doggo.contact.address.city}, ${doggo.contact.address.state}.`;
+  return `${doggo.name} is ${complimentStr} ${genderStr}, who can be found near ${doggo.contact.address.city}, ${doggo.contact.address.state}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)}`;
 }
 
 exports.run = async (req, res) => {
