@@ -80,7 +80,7 @@ const girlCompliments = [
   'a beautiful',
   'a pretty',
   'a graceful',
-  'a oxy',
+  'a foxy',
   'a devine',
   'a lovely',
   'a stunning',
@@ -96,6 +96,48 @@ const boyCompliments = [
   'a lady killer',
   'a slick',
   ...agnosticCompliments,
+];
+
+const agnosticLabels = [
+  'doggo',
+  'pup',
+  'hound',
+  'pooch',
+  'mutt',
+  'doggy',
+  'flea bag',
+  'punk',
+];
+
+const girlLabels = [
+  'lady',
+  'girl',
+  'dame',
+  'princess',
+  'lass',
+  'chick',
+  'señorita',
+  'woman',
+  'gal',
+  'broad',
+  'sister',
+  'damsel',
+  'maiden',
+  ...agnosticLabels,
+];
+
+const boyLabels = [
+  'boy',
+  'lad',
+  'guy',
+  'man',
+  'señior',
+  'dude',
+  'gentleman',
+  'prince',
+  'bloke',
+  'chap',
+  ...agnosticLabels,
 ];
 
 const lookingFor = [
@@ -163,7 +205,7 @@ const getDoggoText = (doggo) => {
   const complimentStr = doggo.gender === 'Female'
     ? getRandomArray(girlCompliments)
     : getRandomArray(boyCompliments);
-  const genderStr = doggo.gender === 'Female' ? 'girl' : 'boy';
+  const genderStr = doggo.gender === 'Female' ? getRandomArray(girlLabels) : getRandomArray(boyLabels);
   const breedStr = doggo.breeds.secondary ? `${doggo.breeds.primary} / ${doggo.breeds.secondary}` : doggo.breeds.primary;
   const breedMixStr = doggo.breeds.mixed ? `${breedStr} mix` : doggo.breeds.primary;
   return `${doggo.name} is ${complimentStr} ${genderStr}, who can be found near ${doggo.contact.address.city}, ${doggo.contact.address.state}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)}`;
