@@ -25,17 +25,81 @@ const getValidDoggos = (animals) => animals.filter((animal) => animal.type === '
   && animal.colors && animal.colors.primary
   && animal.breeds && animal.breeds.primary
   && animal.primary_photo_cropped && animal.primary_photo_cropped.medium
-  && animal.contact && animal.contact.address && animal.contact.address.city && animal.contact.address.state);
+  && animal.contact && animal.contact.address
+    && animal.contact.address.city && animal.contact.address.state);
 
 const getRandomArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-// We could use tags, but the api response seems to always return an empty list. Oh well! They're all good boys and girls.
-const agnosticCompliments = ['a classy', 'a good-looking', 'an elegant', 'a majestic', 'a smart', 'a cool', 'a delightful', 'a knockout', 'a superb', 'a civilized'];
-const girlCompliments = ['a beautiful', 'a pretty', 'a graceful', 'a oxy', 'a devine', 'a lovely', 'a stunning', ...agnosticCompliments];
-const boyCompliments = ['a handsome', 'a sharp', 'a dapper', 'a suave', 'a hunky', 'a studly', 'a lady killer', 'a slick', ...agnosticCompliments];
+// We could use tags, but the api response seems to always return an empty list.
+// Oh well! They're all good boys and girls.
+const agnosticCompliments = [
+  'a classy',
+  'a good-looking',
+  'an elegant',
+  'a majestic',
+  'a smart',
+  'a cool',
+  'a delightful',
+  'a knockout',
+  'a superb',
+  'a civilized',
+  'an adventurous',
+  'an affectionate',
+  'a bright young',
+  'a charming',
+  'a compassionate',
+  'an absolute unit of a',
+  'a courageous',
+  'an enthusiastic',
+  'a happy',
+  'a loyal',
+  'a resourceful',
+  'a sincere',
+  'a witty',
+  'a sleek',
+  'a brave',
+  'a courageous',
+  'a dynamic',
+  'an easygoing',
+  'an energetic',
+  'a friendly',
+  'a gentle spirit of a',
+  'a humorous',
+  'an independent',
+  'a hardworking',
+  'an intuitive',
+  'a kind',
+  'a modest',
+  'a placid',
+  'a quick-witted',
+  'a reserved',
+  'a sensible',
+  'a sensitive',
+];
+const girlCompliments = [
+  'a beautiful',
+  'a pretty',
+  'a graceful',
+  'a oxy',
+  'a devine',
+  'a lovely',
+  'a stunning',
+  ...agnosticCompliments,
+];
+const boyCompliments = [
+  'a handsome',
+  'a sharp',
+  'a dapper',
+  'a suave',
+  'a hunky',
+  'a studly',
+  'a lady killer',
+  'a slick',
+  ...agnosticCompliments,
+];
 
 const lookingFor = [
-  'whose looking for their forever home!',
+  'who\'s looking for their forever home!',
   'who wants a new mom or dad!',
   'who wants to give you a kiss!',
   'who wants to sit for you!',
@@ -103,7 +167,7 @@ const getDoggoText = (doggo) => {
   const breedStr = doggo.breeds.secondary ? `${doggo.breeds.primary} / ${doggo.breeds.secondary}` : doggo.breeds.primary;
   const breedMixStr = doggo.breeds.mixed ? `${breedStr} mix` : doggo.breeds.primary;
   return `${doggo.name} is ${complimentStr} ${genderStr}, who can be found near ${doggo.contact.address.city}, ${doggo.contact.address.state}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)}`;
-}
+};
 
 exports.run = async (req, res) => {
   let parsedBody;
@@ -131,7 +195,7 @@ exports.run = async (req, res) => {
     doggo,
     text: getDoggoText(doggo),
     photo: doggo.primary_photo_cropped.medium,
-    url: doggo.url
+    url: doggo.url,
   };
   console.log(doggoResponse); // logging doggoResponse to debug when necessary
 
@@ -153,7 +217,7 @@ exports.run = async (req, res) => {
     access_token_secret: accessTokenSecret,
   });
 
-  const tweetText = `${doggoResponse.text} ${doggoResponse.url}`
+  const tweetText = `${doggoResponse.text} ${doggoResponse.url}`;
   console.log('thinking about making a tweet');
   if (!doggoResponse.text) {
     console.log('no tweet was generated because the doggo text is wrong');
@@ -161,7 +225,7 @@ exports.run = async (req, res) => {
       doggo,
       doggoText: doggoResponse.text,
       photo: doggo.primary_photo_cropped.medium,
-      url: doggo.url
+      url: doggo.url,
     });
   } else if (parsedBody.noExecuteTweet) {
     res.send({

@@ -1,6 +1,6 @@
 module.exports = {
     "env": {
-        "browser": true,
+        "browser": false,
         "es2021": true
     },
     "extends": [
@@ -11,5 +11,6 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
+        "array-element-newline": ["error", "always"]
     }
 };
