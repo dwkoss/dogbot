@@ -199,6 +199,16 @@ const lookingFor = [
   'who cant wait to be your pumpkin pie!',
   'who gets startled by shadows.',
   'who tries their best!',
+  'who enjoys listening to podcasts while on their walk.',
+  'who\'s a wine by day, whiskey by night type of dog.',
+  'who just wants to be the good cop to your bad cop.',
+  'who\'s not looking for anything serious.',
+  'who cant decide between going out and staying in.',
+  'who suffers from extreme FOMO.',
+  'who doesnt speak English particulaarly well.',
+  'who\'s looking for someone who doesn\'t take themselves too seriously',
+  'who enjoys sunday trips the farmers market!!',
+  'who enjoys pumpkin spice everything.',
 ];
 
 const getDoggoText = (doggo) => {
