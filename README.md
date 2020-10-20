@@ -1,4 +1,4 @@
-[@botwotabot](https://twitter.com/botwotabot)
+[@adopt_a_dog_bot](https://twitter.com/adopt_a_dog_bot)
 
 # Hi, I'm Adopt a Good Dog Bot!!!
 
