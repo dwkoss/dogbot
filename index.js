@@ -301,8 +301,11 @@ const getDogHashTags = (doggo) => {
       return [`#${breed.split(' ').join('')}`];
     });
 
-  const locationHashTags = [`#${address.city}`,
-    `#${stateCodeToStateName[address.state]}`];
+  const locationHashTags = [
+    `#${address.city.split(' ').join('')}`,
+    `#${stateCodeToStateName[address.state].split(' ').join('')}`,
+    `#${address.state}`
+  ];
 
   return [
     ...breedTags,
