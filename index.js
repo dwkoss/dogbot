@@ -224,7 +224,7 @@ const getDogHashTags = (breeds) => {
   // return breeds.
   // let hashtags = [...defaultHashTags];
   const mixedTags = breeds.mixed ? [
-    'mixedbreed',
+    '#mixedbreed',
     '#mutt',
   ] : [];
 
@@ -250,7 +250,7 @@ const getDoggoText = (doggo) => {
   const genderStr = doggo.gender === 'Female' ? getRandomArray(girlLabels) : getRandomArray(boyLabels);
   const breedStr = doggo.breeds.secondary ? `${doggo.breeds.primary} / ${doggo.breeds.secondary}` : doggo.breeds.primary;
   const breedMixStr = doggo.breeds.mixed ? `${breedStr} mix` : doggo.breeds.primary;
-  return `${doggo.name} is ${complimentStr} ${genderStr}, who can be found near ${doggo.contact.address.city}, ${doggo.contact.address.state}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)} ${getDogHashTags(doggo.breeds)}`;
+  return `${doggo.name} is ${complimentStr} ${genderStr}, who can be found near ${doggo.contact.address.city}, ${doggo.contact.address.state}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)} ${getDogHashTags(doggo.breeds).join(' ')}`;
 };
 
 exports.run = async (req, res) => {
