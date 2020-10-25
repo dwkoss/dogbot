@@ -213,6 +213,68 @@ const lookingFor = [
   'who enjoys taking care of others.',
 ];
 
+const stateCodeToStateName = {
+  AL: 'Alabama',
+  AK: 'Alaska',
+  AS: 'American Samoa',
+  AZ: 'Arizona',
+  AR: 'Arkansas',
+  CA: 'California',
+  CO: 'Colorado',
+  CT: 'Connecticut',
+  DE: 'Delaware',
+  DC: 'District Of Columbia',
+  FM: 'Federated States Of Micronesia',
+  FL: 'Florida',
+  GA: 'Georgia',
+  GU: 'Guam',
+  HI: 'Hawaii',
+  ID: 'Idaho',
+  IL: 'Illinois',
+  IN: 'Indiana',
+  IA: 'Iowa',
+  KS: 'Kansas',
+  KY: 'Kentucky',
+  LA: 'Louisiana',
+  ME: 'Maine',
+  MH: 'Marshall Islands',
+  MD: 'Maryland',
+  MA: 'Massachusetts',
+  MI: 'Michigan',
+  MN: 'Minnesota',
+  MS: 'Mississippi',
+  MO: 'Missouri',
+  MT: 'Montana',
+  NE: 'Nebraska',
+  NV: 'Nevada',
+  NH: 'New Hampshire',
+  NJ: 'New Jersey',
+  NM: 'New Mexico',
+  NY: 'New York',
+  NC: 'North Carolina',
+  ND: 'North Dakota',
+  MP: 'Northern Mariana Islands',
+  OH: 'Ohio',
+  OK: 'Oklahoma',
+  OR: 'Oregon',
+  PW: 'Palau',
+  PA: 'Pennsylvania',
+  PR: 'Puerto Rico',
+  RI: 'Rhode Island',
+  SC: 'South Carolina',
+  SD: 'South Dakota',
+  TN: 'Tennessee',
+  TX: 'Texas',
+  UT: 'Utah',
+  VT: 'Vermont',
+  VI: 'Virgin Islands',
+  VA: 'Virginia',
+  WA: 'Washington',
+  WV: 'West Virginia',
+  WI: 'Wisconsin',
+  WY: 'Wyoming',
+};
+
 const defaultHashTags = [
   '#dogsoftwitter',
   '#rescue',
@@ -220,7 +282,9 @@ const defaultHashTags = [
   '#dog',
 ];
 
-const getDogHashTags = (breeds) => {
+const getDogHashTags = (doggo) => {
+  const { breeds } = doggo;
+  const { address } = doggo.contact;
   // return breeds.
   // let hashtags = [...defaultHashTags];
   const mixedTags = breeds.mixed ? [
@@ -228,7 +292,8 @@ const getDogHashTags = (breeds) => {
     '#mutt',
   ] : [];
 
-  const breedTags = (breeds.secondary ? [breeds.primary, breeds.secondary] : [breeds.primary])
+  const breedTags = (breeds.secondary ? [breeds.primary,
+    breeds.secondary] : [breeds.primary])
     .map((breed) => {
       if (breed.includes('/')) {
         return breed.split('/').map((deSlashBreed) => `#${deSlashBreed.split(' ').join('')}`);
@@ -236,10 +301,14 @@ const getDogHashTags = (breeds) => {
       return [`#${breed.split(' ').join('')}`];
     });
 
+  const locationHashTags = [`#${address.city}`,
+    `#${stateCodeToStateName[address.state]}`];
+
   return [
     ...breedTags,
     ...mixedTags,
     ...defaultHashTags,
+    ...locationHashTags,
   ];
 };
 
@@ -250,7 +319,7 @@ const getDoggoText = (doggo) => {
   const genderStr = doggo.gender === 'Female' ? getRandomArray(girlLabels) : getRandomArray(boyLabels);
   const breedStr = doggo.breeds.secondary ? `${doggo.breeds.primary} / ${doggo.breeds.secondary}` : doggo.breeds.primary;
   const breedMixStr = doggo.breeds.mixed ? `${breedStr} mix` : doggo.breeds.primary;
-  return `${doggo.name} is ${complimentStr} ${genderStr}, who can be found near ${doggo.contact.address.city}, ${doggo.contact.address.state}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)} ${getDogHashTags(doggo.breeds).join(' ')}`;
+  return `${doggo.name} is ${complimentStr} ${genderStr}, who can be found near ${doggo.contact.address.city}, ${doggo.contact.address.state}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)} ${getDogHashTags(doggo).join(' ')}`;
 };
 
 exports.run = async (req, res) => {
