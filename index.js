@@ -207,11 +207,41 @@ const lookingFor = [
   'who suffers from extreme FOMO.',
   'who doesnt speak English particulaarly well.',
   'who\'s looking for someone who doesn\'t take themselves too seriously',
-  'who enjoys sunday trips the farmers market!!',
+  'who enjoys sunday trips to the farmers market!!',
   'who enjoys pumpkin spice everything.',
   'who does their own stunt work.',
   'who enjoys taking care of others.',
 ];
+
+const defaultHashTags = [
+  '#dogsoftwitter',
+  '#rescue',
+  '#adopt',
+  '#dog',
+];
+
+const getDogHashTags = (breeds) => {
+  // return breeds.
+  // let hashtags = [...defaultHashTags];
+  const mixedTags = breeds.mixed ? [
+    'mixedbreed',
+    '#mutt',
+  ] : [];
+
+  const breedTags = (breeds.secondary ? [breeds.primary, breeds.secondary] : [breeds.primary])
+    .map((breed) => {
+      if (breed.includes('/')) {
+        return breed.split('/').map((deSlashBreed) => `#${deSlashBreed.split(' ').join('')}`);
+      }
+      return [`#${breed.split(' ').join('')}`];
+    }).flat();
+
+  return [
+    ...breedTags,
+    ...mixedTags,
+    ...defaultHashTags,
+  ];
+};
 
 const getDoggoText = (doggo) => {
   const complimentStr = doggo.gender === 'Female'
@@ -220,7 +250,7 @@ const getDoggoText = (doggo) => {
   const genderStr = doggo.gender === 'Female' ? getRandomArray(girlLabels) : getRandomArray(boyLabels);
   const breedStr = doggo.breeds.secondary ? `${doggo.breeds.primary} / ${doggo.breeds.secondary}` : doggo.breeds.primary;
   const breedMixStr = doggo.breeds.mixed ? `${breedStr} mix` : doggo.breeds.primary;
-  return `${doggo.name} is ${complimentStr} ${genderStr}, who can be found near ${doggo.contact.address.city}, ${doggo.contact.address.state}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)} #dogsoftwitter #dogs #dog`;
+  return `${doggo.name} is ${complimentStr} ${genderStr}, who can be found near ${doggo.contact.address.city}, ${doggo.contact.address.state}! ${doggo.name} is a ${breedMixStr}, ${getRandomArray(lookingFor)} ${getDogHashTags(doggo.breeds)}`;
 };
 
 exports.run = async (req, res) => {
