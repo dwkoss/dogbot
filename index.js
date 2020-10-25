@@ -234,7 +234,7 @@ const getDogHashTags = (breeds) => {
         return breed.split('/').map((deSlashBreed) => `#${deSlashBreed.split(' ').join('')}`);
       }
       return [`#${breed.split(' ').join('')}`];
-    }).flat();
+    });
 
   return [
     ...breedTags,
