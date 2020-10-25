@@ -275,6 +275,7 @@ exports.run = async (req, res) => {
 
   const dogs = await petfinderClient.animal.search({ type: 'dog' });
   const doggo = getRandomArray(getValidDoggos(dogs.data.animals));
+  console.log('doggo', doggo);
   const doggoResponse = {
     doggo,
     text: getDoggoText(doggo),
