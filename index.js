@@ -22,7 +22,7 @@ const getValidDoggos = (animals) => animals.filter((animal) => animal.type === '
   && animal.status === 'adoptable'
   && animal.name
   && animal.gender
-  && animal.colors && animal.colors.primary
+  // && animal.colors && animal.colors.primary
   && animal.breeds && animal.breeds.primary
   && animal.primary_photo_cropped && animal.primary_photo_cropped.medium
   && animal.contact && animal.contact.address
